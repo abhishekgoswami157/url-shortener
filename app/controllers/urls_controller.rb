@@ -16,7 +16,12 @@ class UrlsController < ApplicationController
   end
 
   def show
-    render status: :ok, json: { notice: "successfully redirected", url: @url}
+    @url.click_count = @url.click_count + 1
+    if @url.save
+      render status: :ok, json: { notice: "successfully redirected", url: @url}
+    else
+      render status: :unprocessable_entity, json: { errors: @url.errors.full_messages }
+    end
   end
 
 

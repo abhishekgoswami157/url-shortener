@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import urlsApi from "../../apis/urls";
 
-function ShowUrl({ url }) {
-  let shortened_url = window.location.href + url.slug;
+function ShowUrl({ url, urls, setUrls }) {
+  const shortened_url = window.location.href + url.slug;
   const [err, setErr] = useState(null);
 
   async function handleRedirect() {
@@ -11,6 +11,12 @@ function ShowUrl({ url }) {
       console.log(response);
       window.open(response.data.url.original_url);
       // window.location.href = "/";
+      const newUrls = urls.map((url) =>
+        url.id == response.data.url.id ? response.data.url : url
+      );
+      console.log(urls);
+      console.log(newUrls, "NEWURL");
+      setUrls(newUrls);
     } catch (error) {
       setErr(error?.response?.data?.errors);
     }
@@ -28,7 +34,7 @@ function ShowUrl({ url }) {
         <td className="px-4 py-2">
           <button onClick={handleRedirect}>{shortened_url}</button>
         </td>
-        <td className="px-4 py-2"></td>
+        <td className="px-4 py-2">{url.click_count}</td>
       </tr>
     </>
   );

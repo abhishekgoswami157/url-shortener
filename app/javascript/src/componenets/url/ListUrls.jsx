@@ -18,7 +18,7 @@ function ListUrls({ urls, setUrls }) {
       </thead>
       <tbody>
         {urls?.map((url) => {
-          return <ShowUrl url={url} setUrls={setUrls} />;
+          return <ShowUrl url={url} urls={urls} setUrls={setUrls} />;
         })}
       </tbody>
     </table>
