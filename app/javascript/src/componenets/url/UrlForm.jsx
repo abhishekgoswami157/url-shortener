@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import urlsApi from "../../apis/urls";
 import Errors from "../../shared/Errors";
 
-function UrlForm({ urls, setUrls }) {
+function UrlForm({ urls, setUrls, fetchUrls }) {
   const [err, setErr] = useState(null);
   const {
     values,
@@ -26,7 +26,8 @@ function UrlForm({ urls, setUrls }) {
         });
         console.log(response, "response of create urls");
 
-        setUrls([...urls, response.data.url]);
+        // setUrls([...urls, response.data.url]);
+        fetchUrls();
         actions.setSubmitting(false);
       } catch (error) {
         console.log(error?.response);

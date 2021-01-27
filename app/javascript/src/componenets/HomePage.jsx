@@ -23,9 +23,9 @@ function HomePage() {
   }, []);
   return (
     <section className="container">
-      <UrlForm urls={urls} setUrls={setUrls} />
+      <UrlForm urls={urls} setUrls={setUrls} fetchUrls={fetchUrls} />
       <div className="my-10">
-        <ListUrls urls={urls} setUrls={setUrls} />
+        <ListUrls urls={urls} setUrls={setUrls} fetchUrls={fetchUrls} />
       </div>
     </section>
   );

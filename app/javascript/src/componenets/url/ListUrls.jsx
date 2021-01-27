@@ -1,7 +1,7 @@
 import React from "react";
 import ShowUrl from "./ShowUrl";
 
-function ListUrls({ urls, setUrls }) {
+function ListUrls({ urls, setUrls, fetchUrls }) {
   console.log(urls, "urls in list urls");
   if (urls.length == 0) {
     return <h1>No Url added</h1>;
@@ -18,7 +18,14 @@ function ListUrls({ urls, setUrls }) {
       </thead>
       <tbody>
         {urls?.map((url) => {
-          return <ShowUrl url={url} urls={urls} setUrls={setUrls} />;
+          return (
+            <ShowUrl
+              url={url}
+              urls={urls}
+              setUrls={setUrls}
+              fetchUrls={fetchUrls}
+            />
+          );
         })}
       </tbody>
     </table>
