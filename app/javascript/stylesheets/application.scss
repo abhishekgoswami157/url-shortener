@@ -1,0 +1,8 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.container {
+  max-width: 900px;
+  margin: 2rem auto;
+}
