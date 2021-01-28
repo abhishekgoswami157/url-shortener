@@ -7,20 +7,22 @@
   background: rgba(0, 0, 0, 0.7);
   color: #fff;
   /* padding: 5px; */
-  border-radius: 5px;
+  padding: 0 6px;
+  border-radius: 2px;
   top: calc(100% + 5px);
   display: none;
+  font-size: 14px;
 }
 
 .tooltip-box.visible {
   display: block;
 }
 
-/* .tooltip-arrow {
+.tooltip-arrow {
   position: absolute;
   top: -10px;
   left: 50%;
   border-width: 5px;
   border-style: solid;
   border-color: transparent transparent rgba(0, 0, 0, 0.7) transparent;
-} */
+}

@@ -5,9 +5,9 @@ class ReportsController < ApplicationController
 
   def create
     @email = params[:report][:email]
-    if @email
+    if @email.present?
       ReportMailer.generate_report(@email).deliver_now
-      render json: {notice: "Email successfully sent "}
+      render json: {notice: "Email successfully sent ", email: @email}
     else
       render status: :unprocessable_entity, json: {notice: "Something went wrong"}
     end

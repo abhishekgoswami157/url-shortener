@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import reportsApi from "../apis/reports";
 import Errors from "../shared/Errors";
 import Flash from "../shared/Flash";
+import { validateReport } from "../utils/validateLogic";
 
 function Report() {
   const [err, setErr] = useState(null);
@@ -20,6 +21,7 @@ function Report() {
     initialValues: {
       email: "",
     },
+    validate: validateReport,
     onSubmit: async (values, actions) => {
       try {
         let response = await reportsApi.create({
@@ -36,9 +38,7 @@ function Report() {
         history.push("/", { response: response.data.notice });
         actions.setSubmitting(false);
       } catch (error) {
-        console.log(error?.response);
-        console.log(error?.response?.data?.errors);
-        setErr(error?.response?.data?.errors);
+        actions.setSubmitting(false);
       } finally {
         values.email = "";
       }
@@ -46,9 +46,9 @@ function Report() {
   });
   return (
     <section>
-      <form action="" onSubmit={handleSubmit}>
-        {err ? <Errors err={err} /> : ""}
-        <div className="flex ">
+      <form className="container my-20" action="" onSubmit={handleSubmit}>
+        <small className="block text-red-700">{errors && errors.email}</small>
+        <div className="flex">
           <input
             type="email"
             name="email"
@@ -59,16 +59,16 @@ function Report() {
             className="px-4 shadow-sm appearance-none block w-full border border-gray-300 placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           />
           <div className="">
-            <span className="ml-4 block w-full rounded-md shadow-sm">
+            <span className="block w-full rounded-md shadow-sm">
               <button
                 type="submit"
                 className={`${
                   isSubmitting
-                    ? "cursor-not-allowed bg-gray-700"
-                    : "bg-gray-700"
-                } w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium text-white  hover:bg-gray-800 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out`}
+                    ? "cursor-not-allowed bg-indigo-700"
+                    : "bg-indigo-700"
+                } w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium text-white  hover:bg-indigo-600 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out`}
               >
-                {isSubmitting ? "Genrating Report" : "Generate Report"}
+                {isSubmitting ? "Generating Report" : "Generate Report"}
               </button>
             </span>
           </div>

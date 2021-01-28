@@ -42,7 +42,7 @@ function ShowUrl({ url, urls, setUrls, fetchUrls }) {
   return (
     <>
       {err ? <Errors err={err} /> : ""}
-      <tr className="text-xl text-gray-900 border-gray-200 border-b">
+      <tr className="text-lg text-gray-900 border-gray-200 border-b">
         <td className="px-3 py-4 bg-gray-100">
           <div className="cursor-pointer" onClick={() => handlePin(url.slug)}>
             {url.pinned ? (
@@ -60,7 +60,7 @@ function ShowUrl({ url, urls, setUrls, fetchUrls }) {
             )}
           </div>
         </td>
-        <td className="px-3 pl-12 tracking-wide">
+        <td className="pl-12 py-4 tracking-wide break-all">
           <a
             className="hover:border-b hover:border-indigo-300 hover:text-indigo-400"
             href={url.original_url}
@@ -69,7 +69,7 @@ function ShowUrl({ url, urls, setUrls, fetchUrls }) {
             {url.original_url}
           </a>
         </td>
-        <td className="px-3 pl-12 tracking-wide">
+        <td className="pl-12 pr-4 py-4 tracking-wide">
           <button
             className="hover:border-b hover:border-indigo-300 hover:text-indigo-400"
             onClick={handleRedirect}
@@ -78,7 +78,9 @@ function ShowUrl({ url, urls, setUrls, fetchUrls }) {
           </button>
         </td>
         <td className="px-3 py-4 bg-gray-100 text-indigo-500">
-          {url.click_count}
+          <Tooltip text="number of times the shortened url is clicked">
+            {url.click_count}
+          </Tooltip>
         </td>
       </tr>
     </>

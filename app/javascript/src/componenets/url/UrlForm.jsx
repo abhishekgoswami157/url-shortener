@@ -29,6 +29,7 @@ function UrlForm({ urls, setUrls, fetchUrls }) {
         // setUrls([...urls, response.data.url]);
         fetchUrls();
         actions.setSubmitting(false);
+        values.original_url = "";
       } catch (error) {
         console.log(error?.response);
         console.log(error?.response?.data?.errors);
@@ -40,7 +41,7 @@ function UrlForm({ urls, setUrls, fetchUrls }) {
     <section>
       <form action="" onSubmit={handleSubmit}>
         {err ? <Errors err={err} /> : ""}
-        <div className="flex  my-20">
+        <div className="flex my-20">
           <input
             type="text"
             name="original_url"

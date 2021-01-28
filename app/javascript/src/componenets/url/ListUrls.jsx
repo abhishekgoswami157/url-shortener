@@ -4,7 +4,7 @@ import ShowUrl from "./ShowUrl";
 function ListUrls({ urls, setUrls, fetchUrls }) {
   console.log(urls, "urls in list urls");
   if (urls.length == 0) {
-    return <h1>No Url added</h1>;
+    return <h1 className="text-indigo-700 text-xl font-bold">*No Url Added</h1>;
   }
   return (
     <table className="w-full">
