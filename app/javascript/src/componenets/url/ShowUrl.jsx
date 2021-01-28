@@ -12,15 +12,7 @@ function ShowUrl({ url, urls, setUrls, fetchUrls }) {
   async function handleRedirect() {
     try {
       let response = await urlsApi.show(url.slug);
-      console.log(response);
       window.open(response.data.url.original_url);
-      // window.location.href = "/";
-      // const newUrls = urls.map((url) =>
-      //   url.id == response.data.url.id ? response.data.url : url
-      // );
-      // console.log(urls);
-      // console.log(newUrls, "NEWURL");
-      // setUrls(newUrls);
       fetchUrls();
     } catch (error) {
       setErr(error?.response?.data?.errors);
@@ -30,10 +22,6 @@ function ShowUrl({ url, urls, setUrls, fetchUrls }) {
   async function handlePin(slug) {
     try {
       let response = await urlsApi.pinUrl(slug);
-      // const updatedUrls = urls.map((url) =>
-      //   url.id == response.data.url.id ? response.data.url : url
-      // );
-      // setUrls(updatedUrls);
       fetchUrls();
     } catch (error) {
       setErr(error?.response?.data?.errors);

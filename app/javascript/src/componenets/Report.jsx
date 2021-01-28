@@ -2,8 +2,6 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import reportsApi from "../apis/reports";
-import Errors from "../shared/Errors";
-import Flash from "../shared/Flash";
 import { validateReport } from "../utils/validateLogic";
 
 function Report() {
@@ -29,12 +27,6 @@ function Report() {
             email: values.email,
           },
         });
-        console.log(response, "report of url shortener");
-
-        // setUrls([...urls, response.data.url]);
-        // fetchUrls();
-        // window.location.href = "/";
-        // response.data.notice ? <Flash notice={response.data.notice} /> : "";
         history.push("/", { response: response.data.notice });
         actions.setSubmitting(false);
       } catch (error) {
@@ -47,12 +39,13 @@ function Report() {
   return (
     <section>
       <form className="container my-20" action="" onSubmit={handleSubmit}>
-        <small className="block text-red-700">{errors && errors.email}</small>
+        <small className="block text-red-700">
+          {errors && errors.email && touched.email && errors.email}
+        </small>
         <div className="flex">
           <input
             type="email"
             name="email"
-            // id="url"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.email}

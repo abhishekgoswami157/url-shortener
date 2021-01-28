@@ -24,15 +24,10 @@ function UrlForm({ urls, setUrls, fetchUrls }) {
             original_url: values.original_url,
           },
         });
-        console.log(response, "response of create urls");
-
-        // setUrls([...urls, response.data.url]);
         fetchUrls();
         actions.setSubmitting(false);
         values.original_url = "";
       } catch (error) {
-        console.log(error?.response);
-        console.log(error?.response?.data?.errors);
         setErr(error?.response?.data?.errors);
       }
     },
@@ -45,7 +40,6 @@ function UrlForm({ urls, setUrls, fetchUrls }) {
           <input
             type="text"
             name="original_url"
-            // id="url"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.original_url}
