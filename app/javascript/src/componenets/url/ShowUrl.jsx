@@ -3,6 +3,7 @@ import { AiOutlinePushpin, AiFillPushpin } from "react-icons/ai";
 import { IconContext } from "react-icons";
 
 import urlsApi from "../../apis/urls";
+import Tooltip from "../../shared/Tooltip";
 
 function ShowUrl({ url, urls, setUrls, fetchUrls }) {
   const shortened_url = window.location.href + url.slug;
@@ -41,29 +42,44 @@ function ShowUrl({ url, urls, setUrls, fetchUrls }) {
   return (
     <>
       {err ? <Errors err={err} /> : ""}
-      <tr>
-        <td className="px-4 py-2">
+      <tr className="text-xl text-gray-900 border-gray-200 border-b">
+        <td className="px-3 py-4 bg-gray-100">
           <div className="cursor-pointer" onClick={() => handlePin(url.slug)}>
             {url.pinned ? (
               <IconContext.Provider value={{ color: "blue" }}>
                 <div>
-                  <AiFillPushpin />
+                  <Tooltip text="unpin">
+                    <AiFillPushpin />
+                  </Tooltip>
                 </div>
               </IconContext.Provider>
             ) : (
-              <AiOutlinePushpin />
+              <Tooltip text="pin">
+                <AiOutlinePushpin />
+              </Tooltip>
             )}
           </div>
         </td>
-        <td className="px-4 py-2">
-          <a href={url.original_url} target="_blank">
+        <td className="px-3 pl-12 tracking-wide">
+          <a
+            className="hover:border-b hover:border-indigo-300 hover:text-indigo-400"
+            href={url.original_url}
+            target="_blank"
+          >
             {url.original_url}
           </a>
         </td>
-        <td className="px-4 py-2">
-          <button onClick={handleRedirect}>{shortened_url}</button>
+        <td className="px-3 pl-12 tracking-wide">
+          <button
+            className="hover:border-b hover:border-indigo-300 hover:text-indigo-400"
+            onClick={handleRedirect}
+          >
+            {shortened_url}
+          </button>
         </td>
-        <td className="px-4 py-2">{url.click_count}</td>
+        <td className="px-3 py-4 bg-gray-100 text-indigo-500">
+          {url.click_count}
+        </td>
       </tr>
     </>
   );

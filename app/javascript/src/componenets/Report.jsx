@@ -1,10 +1,13 @@
 import { useFormik } from "formik";
 import React, { useState } from "react";
-import urlsApi from "../../apis/urls";
-import Errors from "../../shared/Errors";
+import { useHistory } from "react-router-dom";
+import reportsApi from "../apis/reports";
+import Errors from "../shared/Errors";
+import Flash from "../shared/Flash";
 
-function UrlForm({ urls, setUrls, fetchUrls }) {
+function Report() {
   const [err, setErr] = useState(null);
+  const history = useHistory();
   const {
     values,
     errors,
@@ -15,24 +18,29 @@ function UrlForm({ urls, setUrls, fetchUrls }) {
     isSubmitting,
   } = useFormik({
     initialValues: {
-      original_url: "",
+      email: "",
     },
     onSubmit: async (values, actions) => {
       try {
-        let response = await urlsApi.create({
-          url: {
-            original_url: values.original_url,
+        let response = await reportsApi.create({
+          report: {
+            email: values.email,
           },
         });
-        console.log(response, "response of create urls");
+        console.log(response, "report of url shortener");
 
         // setUrls([...urls, response.data.url]);
-        fetchUrls();
+        // fetchUrls();
+        // window.location.href = "/";
+        // response.data.notice ? <Flash notice={response.data.notice} /> : "";
+        history.push("/", { response: response.data.notice });
         actions.setSubmitting(false);
       } catch (error) {
         console.log(error?.response);
         console.log(error?.response?.data?.errors);
         setErr(error?.response?.data?.errors);
+      } finally {
+        values.email = "";
       }
     },
   });
@@ -40,27 +48,27 @@ function UrlForm({ urls, setUrls, fetchUrls }) {
     <section>
       <form action="" onSubmit={handleSubmit}>
         {err ? <Errors err={err} /> : ""}
-        <div className="flex  my-20">
+        <div className="flex ">
           <input
-            type="text"
-            name="original_url"
+            type="email"
+            name="email"
             // id="url"
             onChange={handleChange}
             onBlur={handleBlur}
-            value={values.original_url}
+            value={values.email}
             className="px-4 shadow-sm appearance-none block w-full border border-gray-300 placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           />
           <div className="">
-            <span className="block w-full rounded-md shadow-sm">
+            <span className="ml-4 block w-full rounded-md shadow-sm">
               <button
                 type="submit"
                 className={`${
                   isSubmitting
-                    ? "cursor-not-allowed bg-indigo-700"
-                    : "bg-indigo-700"
-                } w-full flex justify-center py-2 px-4 border border-transparent text-white  hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out tracking-wider`}
+                    ? "cursor-not-allowed bg-gray-700"
+                    : "bg-gray-700"
+                } w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium text-white  hover:bg-gray-800 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out`}
               >
-                {isSubmitting ? "Shortenning" : "Shorten!"}
+                {isSubmitting ? "Genrating Report" : "Generate Report"}
               </button>
             </span>
           </div>
@@ -70,4 +78,4 @@ function UrlForm({ urls, setUrls, fetchUrls }) {
   );
 }
 
-export default UrlForm;
+export default Report;

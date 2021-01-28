@@ -7,13 +7,13 @@ function ListUrls({ urls, setUrls, fetchUrls }) {
     return <h1>No Url added</h1>;
   }
   return (
-    <table>
-      <thead>
+    <table className="w-full">
+      <thead className="">
         <tr className="bg-indigo-500 text-white">
-          <th></th>
-          <th>Original</th>
-          <th>Short</th>
-          <th></th>
+          <th className="py-2 text-2xl font-normal tracking-wider"></th>
+          <th className="py-2 text-2xl font-normal tracking-wider">Original</th>
+          <th className="py-2 text-2xl font-normal tracking-wider">Short</th>
+          <th className="py-2 text-2xl font-normal tracking-wider"></th>
         </tr>
       </thead>
       <tbody>

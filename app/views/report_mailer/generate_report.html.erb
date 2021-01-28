@@ -1,0 +1,27 @@
+<section>
+  <table>
+    <caption>
+      Url Shortener App Report
+    </caption>
+    <thead>
+      <tr className="bg-indigo-500 text-white">
+        <th></th>
+        <th>Original</th>
+        <th>Short</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @urls.each do |url|%>
+      <tr>
+        <td className="px-4 py-2">
+          <%= url.pinned ? "Pinned" : "Not Pinned" %>
+        </td>
+        <td className="px-4 py-2"><% url.original_url %></td>
+        <td className="px-4 py-2"><%"#{root_url}/#{url.slug}" %></td>
+        <td className="px-4 py-2"><% url.click_count %></td>
+      </tr>
+      <%end%>
+    </tbody>
+  </table>
+</section>
