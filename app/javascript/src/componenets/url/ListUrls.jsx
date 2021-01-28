@@ -9,10 +9,14 @@ function ListUrls({ urls, setUrls, fetchUrls }) {
     <table className="w-full">
       <thead className="">
         <tr className="bg-indigo-500 text-white">
-          <th className="py-2 text-2xl font-normal tracking-wider"></th>
-          <th className="py-2 text-2xl font-normal tracking-wider">Original</th>
-          <th className="py-2 text-2xl font-normal tracking-wider">Short</th>
-          <th className="py-2 text-2xl font-normal tracking-wider"></th>
+          <th className="py-3 text-2xl font-normal tracking-wider"></th>
+          <th className="pl-12 py-3 text-2xl font-normal tracking-wider text-left">
+            Original
+          </th>
+          <th className="py-3 pl-12 text-2xl font-normal tracking-wider text-left">
+            Short
+          </th>
+          <th className="py-3 text-2xl font-normal tracking-wider"></th>
         </tr>
       </thead>
       <tbody>

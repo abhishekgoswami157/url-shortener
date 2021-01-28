@@ -36,7 +36,7 @@ function UrlForm({ urls, setUrls, fetchUrls }) {
     <section>
       <form action="" onSubmit={handleSubmit}>
         {err ? <Errors err={err} /> : ""}
-        <div className="flex my-20">
+        <div className="flex mt-10 mb-20">
           <input
             type="text"
             name="original_url"
